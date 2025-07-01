@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide GitHub Pages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #0c2461;
+            --secondary: #1e3799;
+            --accent: #00d09c;
+            --dark: #0a1930;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary));
+            color: white;
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--accent), #00a8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .step-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .step-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step-content {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .step-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .mobile-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .mobile-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .mobile-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .tip {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .tip i {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+        
+        .tip-content h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(to right, var(--accent), #00a8ff);
+            color: var(--dark);
+            padding: 15px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .action-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+            
+            .actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fab fa-github"></i> Déployer sur GitHub Pages</h1>
+            <p class="subtitle">Guide complet pour téléverser votre site d'investissement et le rendre accessible au monde entier</p>
+        </header>
+        
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h2 class="step-title"><i class="fas fa-user-plus"></i> Créer un compte GitHub</h2>
+                <div class="step-content">
+                    <p>Si vous n'avez pas encore de compte GitHub:</p>
+                    <ol>
+                        <li>Allez sur <a href="https://github.com" style="color: var(--accent);">github.com</a></li>
+                        <li>Cliquez sur "Sign up"</li>
+                        <li>Remplissez les informations requises</li>
+                        <li>Vérifiez votre email</li>
+                    </ol>
+                    <p>GitHub est gratuit pour les projets publics.</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h2 class="step-title"><i class="fas fa-folder-plus"></i> Créer un nouveau dépôt</h2>
+                <div class="step-content">
+                    <p>Après connexion:</p>
+                    <ol>
+                        <li>Cliquez sur "+" en haut à droite</li>
+                        <li>Sélectionnez "New repository"</li>
+                        <li>Nommez votre dépôt: <strong>votre-username.github.io</strong></li>
+                        <li>Choisissez "Public"</li>
+                        <li>Cochez "Add a README file"</li>
+                        <li>Cliquez sur "Create repository"</li>
+                    </ol>
+                    <div class="code-block">
+                        Nom du dépôt: votre-username.github.io
+                    </div>
+                    <p>Ce nom spécial activera automatiquement GitHub Pages.</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h2 class="step-title"><i class="fas fa-upload"></i> Téléverser vos fichiers</h2>
+                <div class="step-content">
+                    <p>Dans votre nouveau dépôt:</p>
+                    <ol>
+                        <li>Cliquez sur "Add file" > "Upload files"</li>
+                        <li>Glissez-déposez vos fichiers HTML, CSS, JS</li>
+                        <li>Votre fichier principal doit s'appeler <strong>index.html</strong></li>
+                        <li>Cliquez sur "Commit changes"</li>
+                    </ol>
+                    <p>Structure recommandée:</p>
+                    <div class="code-block">
+                        votre-username.github.io/<br>
+                        ├── index.html<br>
+                        ├── style.css<br>
+                        ├── script.js<br>
+                        └── images/<br>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h2 class="step-title"><i class="fas fa-cog"></i> Activer GitHub Pages</h2>
+                <div class="step-content">
+                    <p>Une fois les fichiers téléversés:</p>
+                    <ol>
+                        <li>Allez dans l'onglet "Settings"</li>
+                        <li>Dans le menu de gauche, cliquez sur "Pages"</li>
+                        <li>Dans "Source", sélectionnez la branche "main"</li>
+                        <li>Laissez le dossier sur "/ (root)"</li>
+                        <li>Cliquez sur "Save"</li>
+                    </ol>
+                    <p>Votre site sera disponible dans 1-2 minutes à l'adresse:</p>
+                    <div class="code-block">
+                        https://votre-username.github.io
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mobile-section">
+            <h2 class="mobile-title"><i class="fas fa-mobile-alt"></i> Méthode spéciale pour mobile</h2>
+            <p>Si vous travaillez uniquement depuis votre téléphone:</p>
+            
+            <div class="mobile-tips">
+                <div class="tip">
+                    <i class="fas fa-download"></i>
+                    <div class="tip-content">
+                        <h3>Application GitHub</h3>
+                        <p>Téléchargez l'app GitHub depuis votre store. Elle permet de gérer vos dépôts et fichiers directement depuis mobile.</p>
+                    </div>
+                </div>
+                
+                <div class="tip">
+                    <i class="fas fa-cloud"></i>
+                    <div class="tip-content">
+                        <h3>Éditeur en ligne</h3>
+                        <p>Utilisez GitHub.dev - connectez-vous à GitHub et ajoutez ".dev" à l'URL de votre dépôt pour éditer directement dans le navigateur.</p>
+                    </div>
+                </div>
+                
+                <div class="tip">
+                    <i class="fas fa-file-import"></i>
+                    <div class="tip-content">
+                        <h3>Fichiers mobiles</h3>
+                        <p>Enregistrez votre code HTML dans les fichiers de votre téléphone, puis uploader via l'app GitHub ou le site mobile.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="code-block" style="margin-top: 20px;">
+                <strong>URL GitHub Mobile:</strong> github.com<br>
+                <strong>Application GitHub:</strong> Disponible sur iOS et Android
+            </div>
+        </div>
+        
+        <div class="mobile-section" style="background: rgba(0, 168, 255, 0.1);">
+            <h2 class="mobile-title"><i class="fas fa-lightbulb"></i> Conseils avancés</h2>
+            
+            <div class="step-content">
+                <h3><i class="fas fa-sync-alt"></i> Mises à jour du site</h3>
+                <p>Pour modifier votre site:</p>
+                <ol>
+                    <li>Allez dans votre dépôt GitHub</li>
+                    <li>Ouvrez le fichier à modifier (ex: index.html)</li>
+                    <li>Cliquez sur l'icône de crayon (éditer)</li>
+                    <li>Faites vos modifications</li>
+                    <li>Cliquez sur "Commit changes"</li>
+                </ol>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Dépannage</h3>
+                <p>Problèmes courants et solutions:</p>
+                <ul>
+                    <li><strong>Site non accessible</strong> - Attendez 2-3 minutes après l'activation</li>
+                    <li><strong>Erreurs 404</strong> - Vérifiez que votre fichier s'appelle index.html</li>
+                    <li><strong>Design cassé</strong> - Vérifiez les chemins vers les fichiers CSS/JS</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <a href="https://github.com" class="action-btn" target="_blank">
+                <i class="fab fa-github"></i> Aller sur GitHub
+            </a>
+            <a href="https://pages.github.com" class="action-btn secondary" target="_blank">
+                <i class="fas fa-book"></i> Documentation officielle
+            </a>
+        </div>
+        
+        <footer>
+            <p>Votre site sera en ligne à l'adresse: <strong>https://votre-username.github.io</strong></p>
+            <p>GitHub Pages est un service gratuit d'hébergement pour sites statiques</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animation pour les cartes
+        document.querySelectorAll('.step-card').forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = "1";
+                card.style.transform = "translateY(0)";
+            }, 300 * index);
+            
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        });
+        
+        // Animation pour la section mobile
+        const mobileSection = document.querySelector('.mobile-section');
+        setTimeout(() => {
+            mobileSection.style.opacity = "1";
+            mobileSection.style.transform = "translateY(0)";
+        }, 1200);
+        
+        mobileSection.style.opacity = "0";
+        mobileSection.style.transform = "translateY(20px)";
+        mobileSection.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+    </script>
+</body>
+</html>
